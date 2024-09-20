@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche de film!{% endblock %}
+
+{% block body %}
+    <h1>Recherche de film</h1>
+
+    <form method="get" action="{{ path('movies_search') }}">
+        <input type="text" name="title" placeholder="Entrez un titre de film" value="{{ title}}">
+        <button type="submit">Rechercher</button>
+    </form>
+{% if movies is not empty %}
+    <h2>Résultats de recherche pour "{{ title }}" : </h2>
+    <ul>
+        {% for movie in movies %}
+            <li>{{ movie.Title }} ({{ movie.Year }})</li>
+        {% endfor %}
+    </ul>
+    {% elseif title is defined %}
+        <p>Aucun résultat trouvé pour "{{ title }}</p>
+    {% endif %}
+{% endblock %}
